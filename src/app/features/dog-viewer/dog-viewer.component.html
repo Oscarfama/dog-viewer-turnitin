@@ -1,0 +1,32 @@
+<div class="page-wrapper">
+  <!-- ── Header ──────────────────────────────────────── -->
+  <header class="app-header" role="banner">
+    <div class="header-text">
+      <h1 class="app-title">Dog Viewer</h1>
+    </div>
+  </header>
+
+  @if (!state.isLoading() && !state.hasError() && state.mainImage()) {
+    <div class="content-layout">
+      <main class="main-content" role="main" aria-label="Dog viewer">
+        <app-main-image
+          [dog]="state.mainImage()!"
+          (favoriteToggled)="onFavoriteToggled()"
+        />
+        <app-thumbnail-grid
+          [thumbnails]="state.thumbnails()"
+          [activeDogUrl]="state.mainImage()?.url ?? null"
+          (dogSelected)="onDogSelected($event)"
+        />
+      </main>
+
+      <!-- favorites panel -->
+      <app-favorites-panel
+        [favorites]="state.favorites()"
+        [activeDogUrl]="state.mainImage()?.url ?? null"
+        (favoriteSelected)="onFavoriteSelected($event)"
+        (favoriteRemoved)="onFavoriteRemoved($event)"
+      />
+    </div>
+  }
+</div>

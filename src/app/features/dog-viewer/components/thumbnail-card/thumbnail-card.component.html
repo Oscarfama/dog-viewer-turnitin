@@ -1,0 +1,17 @@
+<button
+  class="thumbnail-card"
+  [class.is-active]="isActive()"
+  [attr.aria-label]="'View ' + dog().breed + ' as main image'"
+  [attr.aria-pressed]="isActive()"
+  (click)="selected.emit(dog())"
+  type="button"
+>
+  <div class="thumb-img-wrapper">
+    <img
+      [src]="dog().url"
+      class="thumb-img"
+      loading="lazy"
+    />
+  </div>
+  <span class="thumb-breed">{{ dog().breed }}</span>
+</button>

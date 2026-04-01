@@ -1,0 +1,51 @@
+<aside class="favorites-panel" aria-label="Favorite dogs">
+  <div class="panel-header">
+    <h2 class="panel-title">
+      Favorites
+    </h2>
+    @if (favorites().length > 0) {
+      <span class="badge" aria-label="{{ favorites().length }} favorites">
+        {{ favorites().length }}
+      </span>
+    }
+  </div>
+
+  @if (favorites().length === 0) {
+    <div class="empty-state" role="status">
+      <p class="empty-text">No favorites yet.</p>
+      <p class="empty-hint">Click <strong>Favorite</strong> on any dog to save it here.</p>
+    </div>
+  } @else {
+    <ul class="favorites-list" role="list" aria-label="Saved favorite dogs">
+      @for (fav of favorites(); track fav.url) {
+        <li class="fav-item" [class.is-active]="activeDogUrl() === fav.url">
+          <button
+            class="fav-btn"
+            [attr.aria-label]="'View ' + fav.breed + ' as main image'"
+            [attr.aria-pressed]="activeDogUrl() === fav.url"
+            (click)="favoriteSelected.emit(fav)"
+            type="button"
+          >
+            <div class="fav-img-wrapper">
+              <img
+                [src]="fav.url"
+                class="fav-img"
+                loading="lazy"
+              />
+            </div>
+            <span class="fav-breed">{{ fav.breed }}</span>
+          </button>
+
+          <button
+            class="remove-btn"
+            [attr.aria-label]="'Remove ' + fav.breed + ' from favorites'"
+            (click)="favoriteRemoved.emit(fav.url)"
+            type="button"
+          >
+            ✕
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</aside>

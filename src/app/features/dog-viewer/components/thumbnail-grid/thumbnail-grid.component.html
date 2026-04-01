@@ -1,0 +1,14 @@
+<section class="thumbnail-grid-section" aria-label="Dog thumbnails">
+  <h2 class="section-heading">More Dogs</h2>
+  <ul class="grid" role="list">
+    @for (dog of thumbnails(); track dog.id) {
+      <li>
+        <app-thumbnail-card
+          [dog]="dog"
+          [isActive]="activeDogUrl() === dog.url"
+          (selected)="dogSelected.emit($event)"
+        />
+      </li>
+    }
+  </ul>
+</section>

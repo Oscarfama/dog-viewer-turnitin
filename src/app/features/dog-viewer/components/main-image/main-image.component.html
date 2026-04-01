@@ -1,0 +1,24 @@
+<article class="main-image" aria-label="Main dog display">
+  <div class="image-wrapper">
+    <img
+      [src]="dog().url"
+      class="hero-img"
+    />
+    <div  aria-hidden="true"></div>
+  </div>
+
+  <div class="image-meta">
+    <div class="breed-info">
+      <span class="breed-label" aria-label="Dog breed">{{ dog().breed }}</span>
+    </div>
+    <div class="actions">
+      <button
+        class="btn btn-favorite"
+        (click)="favoriteToggled.emit()"
+        type="button"
+      >
+        <span>Favorite</span>
+      </button>
+    </div>
+  </div>
+</article>
